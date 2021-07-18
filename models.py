@@ -1,3 +1,4 @@
+import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, ForeignKey, Integer, String, Table, Float, DateTime, Enum
 from sqlalchemy.orm import relationship
