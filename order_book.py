@@ -48,28 +48,30 @@ def process_order(order):
         remaining_buy = existing_order.sell_amount - new_order.buy_amount
         remaining_sell = existing_order.buy_amount - new_order.sell_amount
         
-        derived_order = Order( sender_pk=existing_order.sender_pk,
-                      receiver_pk=existing_order.receiver_pk, 
-                      buy_currency=existing_order.buy_currency, 
-                      sell_currency=existing_order.sell_currency, 
-                      buy_amount=remaining_buy, 
-                      sell_amount=remaining_sell,
-                      creator_id=existing_order.id)
-        session.add(derived_order)
-        session.commit()
+        if (remaining_buy > 0  and remaining_sell > 0):
+          derived_order = Order( sender_pk=existing_order.sender_pk,
+                        receiver_pk=existing_order.receiver_pk, 
+                        buy_currency=existing_order.buy_currency, 
+                        sell_currency=existing_order.sell_currency, 
+                        buy_amount=remaining_buy, 
+                        sell_amount=remaining_sell,
+                        creator_id=existing_order.id)
+          session.add(derived_order)
+          session.commit()
       
       elif new_order.buy_amount > existing_order.sell_amount:
         remaining_buy = new_order.buy_amount - existing_order.sell_amount
         remaining_sell = new_order.sell_amount - existing_order.buy_amount
         
-        derived_order = Order( sender_pk=new_order.sender_pk,
-                      receiver_pk=new_order.receiver_pk, 
-                      buy_currency=new_order.buy_currency, 
-                      sell_currency=new_order.sell_currency, 
-                      buy_amount=remaining_buy, 
-                      sell_amount=remaining_sell,
-                      creator_id=new_order.id)
-        session.add(derived_order)
-        session.commit()
+        if (remaining_buy > 0  and remaining_sell > 0):
+          derived_order = Order( sender_pk=new_order.sender_pk,
+                        receiver_pk=new_order.receiver_pk, 
+                        buy_currency=new_order.buy_currency, 
+                        sell_currency=new_order.sell_currency, 
+                        buy_amount=remaining_buy, 
+                        sell_amount=remaining_sell,
+                        creator_id=new_order.id)
+          session.add(derived_order)
+          session.commit()
     
     pass
