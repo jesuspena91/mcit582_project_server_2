@@ -59,19 +59,19 @@ def process_order(order):
           session.add(derived_order)
           session.commit()
       
-      elif new_order.buy_amount > existing_order.sell_amount:
-        remaining_buy = new_order.buy_amount - existing_order.sell_amount
-        remaining_sell = new_order.sell_amount - existing_order.buy_amount
+      # elif new_order.buy_amount > existing_order.sell_amount:
+      #   remaining_buy = new_order.buy_amount - existing_order.sell_amount
+      #   remaining_sell = new_order.sell_amount - existing_order.buy_amount
         
-        if (remaining_buy > 0  and remaining_sell > 0):
-          derived_order = Order( sender_pk=new_order.sender_pk,
-                        receiver_pk=new_order.receiver_pk, 
-                        buy_currency=new_order.buy_currency, 
-                        sell_currency=new_order.sell_currency, 
-                        buy_amount=remaining_buy, 
-                        sell_amount=remaining_sell,
-                        creator_id=new_order.id)
-          session.add(derived_order)
-          session.commit()
+      #   if (remaining_buy > 0  and remaining_sell > 0):
+      #     derived_order = Order( sender_pk=new_order.sender_pk,
+      #                   receiver_pk=new_order.receiver_pk, 
+      #                   buy_currency=new_order.buy_currency, 
+      #                   sell_currency=new_order.sell_currency, 
+      #                   buy_amount=remaining_buy, 
+      #                   sell_amount=remaining_sell,
+      #                   creator_id=new_order.id)
+      #     session.add(derived_order)
+      #     session.commit()
     
     pass
